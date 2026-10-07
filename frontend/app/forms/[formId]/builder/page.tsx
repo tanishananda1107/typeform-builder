@@ -1,0 +1,3 @@
+'use client';
+import {useEffect,useState} from 'react';import {useParams} from 'next/navigation';import Link from 'next/link';import {api} from '../../../../lib/api';import {Form} from '../../../../lib/types';import Builder from '../../../../components/builder/Builder';
+export default function BuilderPage(){const p=useParams<{formId:string}>();const[form,setForm]=useState<Form|null>(null);const[err,setErr]=useState('');const load=()=>api<Form>(`/forms/${p.formId}`).then(setForm).catch(e=>setErr(e.message));useEffect(()=>{load()},[p.formId]);if(err)return <div className="page"><p>{err}</p><Link href="/">Back</Link></div>;if(!form)return <div className="page">Loading…</div>;return <div style={{minHeight:'100vh'}}><Builder initial={form} onChangeSaved={load}/></div>}

@@ -1,0 +1,3 @@
+'use client';
+import {useEffect,useState} from 'react';import {useParams} from 'next/navigation';import Link from 'next/link';import {api} from '../../../../lib/api';import {Form} from '../../../../lib/types';import FormRunner from '../../../../components/respondent/FormRunner';
+export default function Preview(){const p=useParams<{formId:string}>();const[f,setF]=useState<Form|null>(null);useEffect(()=>{api<Form>(`/forms/${p.formId}`).then(setF)},[p.formId]);if(!f)return <div className="page">Loading…</div>;return <><div style={{position:'fixed',zIndex:50,top:14,left:18}}><Link href={`/forms/${f.id}/builder`} className="btn">← Builder</Link></div><FormRunner form={f} preview/></>}

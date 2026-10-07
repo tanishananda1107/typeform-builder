@@ -1,0 +1,3 @@
+'use client';
+import {useEffect,useState} from 'react';import {useParams} from 'next/navigation';import {api} from '../../../lib/api';import {Form} from '../../../lib/types';import FormRunner from '../../../components/respondent/FormRunner';
+export default function PublicPage(){const p=useParams<{slug:string}>();const[f,setF]=useState<Form|null>(null);const[err,setErr]=useState('');useEffect(()=>{api<Form>(`/public/forms/${p.slug}`).then(setF).catch(e=>setErr(e.message))},[p.slug]);if(err)return <div className="thankyou"><div><h1>Form unavailable</h1><p className="muted">{err}</p></div></div>;if(!f)return <div className="thankyou">Loading…</div>;return <FormRunner form={f}/>}
