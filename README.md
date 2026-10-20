@@ -181,12 +181,3 @@ The backend automatically seeds two published forms on a fresh database:
 12. Export CSV.
 13. Duplicate and rename a form.
 
-## Interview discussion points
-
-- Why normalized relational tables were used.
-- Why public respondent endpoints are separated from creator endpoints.
-- Why server validation duplicates client validation.
-- How drag-and-drop order is persisted.
-- How the same question renderer is reused by preview and respondent mode.
-- How the respondent state machine moves from question to question.
-- How response statistics are derived.
